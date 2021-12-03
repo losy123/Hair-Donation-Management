@@ -1,0 +1,101 @@
+﻿@model ProjectGmarDonation.Models.HairDonation
+
+@{
+    ViewBag.Title = "Approve";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Approve/Deny Page</h2>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    .rgbColour {
+        display: block !important;
+        width: 10em;
+        height: 5em;
+        margin-top: 0.5em;
+        text-align: center;
+        line-height: 5em;
+    }
+</style>
+
+<h3>Are you sure you want this hair?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HairType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HairType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HairColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HairColor)
+            <div class="rgbColour" style="background-color: @Model.HairColor">Colour Preview</div>
+        </dd>
+
+        @if (Model.HairColor2 != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.HairColor2)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HairColor2)
+                <div class="rgbColour" style="background-color: @Model.HairColor2">Colour Preview</div>
+            </dd>
+        }
+
+        @if (Model.HairColor3 != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.HairColor3)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HairColor3)
+                <div class="rgbColour" style="background-color: @Model.HairColor3">Colour Preview</div>
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HairLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HairLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imgurl)
+        </dt>
+
+        <dd>
+            @{
+                var base64 = Convert.ToBase64String(Model.imgurl);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+            }
+            <img src="@imgsrc" alt="Card image cap" width="200" height="220" />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Approve" class="btn btn-info" /> |
+            @Html.ActionLink("Back to List", "ApproveIndex")
+        </div>
+    }
+</div>
+

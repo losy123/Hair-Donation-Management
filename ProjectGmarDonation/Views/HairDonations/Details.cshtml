@@ -1,0 +1,51 @@
+﻿@model ProjectGmarDonation.Models.HairDonation
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HairDonation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HairType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HairType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HairColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HairColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HairLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HairLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imgurl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imgurl)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

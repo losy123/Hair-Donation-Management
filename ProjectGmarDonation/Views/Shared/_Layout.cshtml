@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+
+
+        .s123 p, h1 {
+            font: Tahoma, Geneva, sans-serif;
+            color: white;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+
+
+        h2 {
+            text-shadow: 1px 1px 1px #ffffff;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            background-image: url('../../Img/woman-182473.jpg');
+            background-repeat: no-repeat;
+            background-color: #67519F;
+            background-position: center;
+            background-size: cover;
+        }
+
+        label {
+            font-size: 15px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        h1,h2,p,a {
+            font-family: 'Open Sans', sans-serif;
+        }
+        a{
+            color:black;
+        }
+        hr {
+            border-top-color: black;
+            border-width: 3px;
+        }
+        .borderexample {
+            border-style: none solid none none;
+            border-right-width:thin;
+            border-color: #000000;
+        }
+        .content-footer > p {
+            /* Typography Declarations */
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        .content-footer {
+            margin: 50px 0;
+            padding: 20px 0;
+            text-align: center;
+            background-color: #73A8C2;
+            text-decoration: none;
+        }
+
+        .social {
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .a1 {
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .li1 {
+            display: inline-block;
+            margin: 0 5px;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="~/images/hairlogo.PNG" length="60px" width="60px" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse ">
+                <ul class="nav navbar-nav">
+                    <li class="borderexample">@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (User != null && User.IsInRole("Donor"))
+                    {
+                        <li class="borderexample">@Html.ActionLink("Donate Hair", "Create", "HairDonations")</li>
+                    }
+                    @if (User != null && User.IsInRole("Requester"))
+                    {
+                        <li class="borderexample">@Html.ActionLink("Request Hair", "Index", "HairDonations")</li>
+                        <li class="borderexample">@Html.ActionLink("My Requsted Hair", "MyRequstedHair", "HairDonations")</li>
+                    }
+                    @if (User != null && User.IsInRole("Admin"))
+                    {
+                        <li class="borderexample">@Html.ActionLink("Request Hair", "Index", "HairDonations")</li>
+                        <li class="borderexample">@Html.ActionLink("Donate Hair", "Create", "HairDonations")</li>
+                        <li class="borderexample">@Html.ActionLink("My Requsted Hair", "MyRequstedHair", "HairDonations")</li>
+                        <li class="borderexample">@Html.ActionLink("Donated Hair", "ApproveIndex", "HairDonations")</li>
+                    }
+                    <li class="borderexample">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="content-footer" style="margin-left: 350px; margin-right: 350px;">
+        <p>Say hi to us on these social networks:</p>
+        <ul class="social">
+            <img src="~/Img/github-sign.png" width="25" height="25"/><li class="li1"><a class="a1" href="https://github.com/losy123">GitHub</a></li>
+            <img src="~/Img/twitter.png" width="25" height="25"/><li class="li1"><a class="a1" href="https://twitter.com/zoabi_kamal">Kamal Twitter</a></li>
+            <img src="~/Img/twitter.png" width="25" height="25"/><li class="li1"><a class="a1" href="https://twitter.com/losy123">Elias Twitter</a></li>
+            <img src="~/Img/instagram.png" width="25" height="25"/><li class="li1"><a class="a1" href="https://www.instagram.com/elias.odeh/">Elias Instagram</a></li>
+            <img src="~/Img/instagram.png" width="25" height="25"/><li class="li1"><a class="a1" href="https://www.instagram.com/kamal.zu/">Kamal Instagram</a></li>
+        </ul>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+
+</body>
+</html>

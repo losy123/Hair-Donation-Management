@@ -1,0 +1,186 @@
+﻿@model ProjectGmarDonation.Models.HairDonation
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("Create", "HairDonations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>HairDonation</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.HairType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <table>
+                    <tr>
+                        <td>
+                            @Html.Label("Curly")
+                            @Html.RadioButtonFor(Model => Model.HairType, "Culry")
+                        </td>
+                        <td>
+                            @Html.Label("Wavy")
+                            @Html.RadioButtonFor(Model => Model.HairType, "Wavy")
+                        </td>
+                        <td>
+                            @Html.Label("Smooth")
+                            @Html.RadioButtonFor(Model => Model.HairType, "Smooth")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="@Href("~/Images/Curly.jpg")" alt="IMAGES" width="150" height="150" />
+                        </td>
+                        <td>
+                            <img src="@Href("~/Images/Wavy.jpg")" alt="IMAGES" width="150" height="150" />
+                        </td>
+                        <td>
+                            <img src="@Href("~/Images/Smooth.jpg")" alt="IMAGES" width="150" height="150" />
+                        </td>
+                    </tr>
+                </table>
+                @Html.ValidationMessageFor(model => model.HairType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HairLength, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <table>
+                    <tr>
+                        <td>
+                            @Html.Label("10-20 CM")
+                            @Html.RadioButtonFor(Model => Model.HairLength, "10-20 CM")
+                        </td>
+                        <td>
+                            @Html.Label("10-40 CM")
+                            @Html.RadioButtonFor(Model => Model.HairLength, "10-40 CM")
+                        </td>
+                        <td>
+                            @Html.Label("60+ CM")
+                            @Html.RadioButtonFor(Model => Model.HairLength, "10-60 CM")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="@Href("~/Images/10,20 Cm.PNG")" alt="IMAGES" width="150" height="150" />
+                        </td>
+                        <td>
+                            <img src="@Href("~/Images/10,40 Cm.PNG")" alt="IMAGES" width="150" height="250" />
+                        </td>
+                        <td>
+                            <img src="@Href("~/Images/10,60CM.PNG")" alt="IMAGES" width="150" height="400" />
+                        </td>
+                    </tr>
+                </table>
+                @Html.ValidationMessageFor(model => model.HairLength, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imgurl, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="file" name="image1" id="image1" accept="image/*" onchange="loadFile(event)" class="form-control" style="width:100%" />
+                        </td>
+                        <td>
+                            <img id="output" width="200" height="220" />
+                        </td>
+                    </tr>
+                </table>
+                <script>
+                    var loadFile = function (event) {
+                        var output = document.getElementById('output');
+                        output.src = URL.createObjectURL(event.target.files[0]);
+                        output.onload = function () {
+                            URL.revokeObjectURL(output.src) // free memory
+                        }
+                    };
+                </script>
+                @Html.ValidationMessageFor(model => model.imgurl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           
+            @Html.LabelFor(model => model.HairColor, htmlAttributes: new { @class = "control-label col-md-2" })
+            
+            <div class="col-md-10">
+
+                @Html.TextBoxFor(model => model.HairColor, new { type = "color" })
+                <br />
+                <br />
+                <input type="button" value="Is There More Than One Color?" onclick="myFunction()">
+                <br />
+                <br />
+                <div id="myDIV" style="display: none;">
+                    @Html.TextBoxFor(model => model.HairColor2, new { type = "color"})
+                </div>
+
+                <script type="text/javascript">
+                    function myFunction() {
+                        var x = document.getElementById("myDIV");
+                        if (x.style.display === "none") {
+                            x.style.display = "block";
+                        }
+                        else {
+                            x.style.display = "none";
+                        }
+                    }
+
+                </script>
+                <br />
+                <input type="button" value="Is There More two Colors?" onclick="myFunction2()">
+                <br />
+                <br />
+                <div id="myDIV2" style="display: none;">
+                    @Html.TextBoxFor(model => model.HairColor3, new { type = "color"})
+                </div>
+
+                <script type="text/javascript">
+                    function myFunction2() {
+                        var x = document.getElementById("myDIV2");
+                        if (x.style.display === "none") {
+                            x.style.display = "block";
+                        }
+                        else {
+                            x.style.display = "none";
+                        }
+                    }
+
+                </script>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+
+                <input type="submit" value="Create" class="btn btn-default" />
+                @if (Model != null)
+                {
+                    <script type="text/javascript">alert("You Donated Successfully!");</script>
+                }
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

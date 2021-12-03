@@ -1,0 +1,111 @@
+﻿@model IEnumerable<ProjectGmarDonation.Models.HairDonation>
+
+@{
+    ViewBag.Title = "ApproveIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ApproveIndex</h2>
+
+<style>
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+    }
+
+    .styled-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+        .styled-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+            .styled-table tbody tr:nth-of-type(even) {
+                background-color: #B2F9FC;
+            }
+
+            .styled-table tbody tr:nth-of-type(odd) {
+                background-color: #9D84B7;
+            }
+
+            .styled-table tbody tr:last-of-type {
+                border-bottom: 2px solid #009879;
+            }
+
+            .styled-table tbody tr.active-row {
+                font-weight: bold;
+                color: #009879;
+            }
+</style>
+<table class="styled-table">
+    <tr>
+        <th>
+            Image
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HairType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HairLength)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HairColor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HairColor2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HairColor3)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Approved == false)
+        {
+            <tr class="active-row">
+                <td>
+                    @{
+                        var base64 = Convert.ToBase64String(item.imgurl);
+                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                    }
+                    <img src="@imgsrc" alt="Card image cap" width="200" height="220" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HairType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HairLength)
+                </td>
+                <td class="" style="background-color: @item.HairColor">
+                    @Html.DisplayFor(modelItem => item.HairColor)
+                </td>
+                <td class="" style="background-color: @item.HairColor2">
+                    @Html.DisplayFor(modelItem => item.HairColor2)
+                </td>
+                <td style="background-color: @item.HairColor3">
+                    @Html.DisplayFor(modelItem => item.HairColor3)
+                </td>
+                <td>
+                    @Html.ActionLink("Approve", "Approve", new { id = item.Id }) |
+                    @Html.ActionLink("Deny", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

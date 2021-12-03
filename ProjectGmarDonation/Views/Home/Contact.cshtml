@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Contact Us";
+}
+<br>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        label {
+            font-size: 15px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        h1 {
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Contact us</h1>
+    <form action="mailto:eliasodeh70@gmail.com" method="post" enctype="text/plain">
+        <label>Name:</label><br>
+
+        <input type="text" onfocus="this.value=''" value="Whats Your Name" text="Name" name="name"><br>
+        <br>
+        <label for="email">Enter your email:</label><br>
+
+        <input type="email" id="email" onfocus="this.value=''" value="Whats Your Email" name="email"><br>
+        <br>
+        <label for="Subject">What is this about?</label><br>
+        <select name="Subject">
+            <option value="Hair Donation Problem">Hair Donation Problem</option>
+            <option value="Hair Donation Problem">Website Bug/exploit</option>
+            <option value="Money Donation Problem">Money Donation Problem</option>
+        </select>
+        <br>
+        <br>
+        <label class="cmt">Comment:</label><br>
+        <textarea name="Massege" rows="10" cols="2000"></textarea>
+        <br>
+        <input type="submit" class="btn btn-success" value="Send">
+        <input type="reset" class="btn btn-info" value="Reset">
+
+    </form>
+</body>
+</html>
